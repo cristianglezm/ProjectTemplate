@@ -1,6 +1,7 @@
 cmake_minimum_required(VERSION 3.1)
 
 set(PROJECT_NAME "ProjectTemplate")
+set(PROJECT_DESCRIPTION "ProjectTemplate")
 
 ################################################################################
 ### User options.
@@ -103,4 +104,4 @@ endif(${PROJECT_NAME}_BUILD_DOCS)
 install(TARGETS ${PROJECT_NAME} RUNTIME DESTINATION . 
 				ARCHIVE DESTINATION .)
 
-install(FILES LICENSE.txt README.md DESTINANTION .)
+install(FILES LICENSE.txt README.md DESTINATION .)
