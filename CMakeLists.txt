@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.1)
+cmake_minimum_required(VERSION 3.1...3.14)
 
 set(PROJECT_NAME "ProjectTemplate")
 set(PROJECT_DESCRIPTION "ProjectTemplate")
@@ -13,10 +13,6 @@ option(${PROJECT_NAME}_BUILD_STATIC "Build static" OFF)
 option(${PROJECT_NAME}_BUILD_DOCS "Build documentation" OFF)
 
 SET(BUILD_SHARED_LIBS TRUE)
-if(${PROJECT_NAME}_BUILD_STATIC)
-	SET(BUILD_SHARED_LIBS FALSE)
-	SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -static-libgcc -static-libstdc++ -static")
-endif(${PROJECT_NAME}_BUILD_STATIC)
 
 ################################################################################
 ### Project files.
@@ -41,7 +37,15 @@ add_executable(${PROJECT_NAME} ${${PROJECT_NAME}_SOURCES} ${${PROJECT_NAME}_INCL
 ### Enable C++17 and warnings
 ################################################################################
 
-SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++17 -Wall")
+SET(CMAKE_CXX_STANDARD 17)
+SET(CMAKE_CXX_STANDARD_REQUIRED ON)
+SET(CMAKE_CXX_EXTENSIONS OFF)
+
+if(${PROJECT_NAME}_BUILD_STATIC)
+	SET(BUILD_SHARED_LIBS FALSE)
+	SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -static-libgcc -static-libstdc++ -static -Wall")
+endif(${PROJECT_NAME}_BUILD_STATIC)
+
 if(NOT CMAKE_BUILD_TYPE)
 	set(CMAKE_BUILD_TYPE Release CACHE STRING "Choose the type of build (Debug or Release)" FORCE)
 endif()
